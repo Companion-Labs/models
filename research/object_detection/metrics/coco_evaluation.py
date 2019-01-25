@@ -51,7 +51,7 @@ class CocoDetectionEvaluator(object_detection_evaluation.DetectionEvaluator):
     self._annotation_id = 1
     self._metrics = None
     self._include_metrics_per_category = include_metrics_per_category
-    self._all_metrics_per_category = all_metrics_per_category
+    self._all_metrics_per_category = True #all_metrics_per_category
 
   def clear(self):
     """Clears the state to prepare for a fresh evaluation."""

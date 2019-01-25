@@ -237,6 +237,11 @@ class COCOEvalWrapper(cocoeval.COCOeval):
     self.accumulate()
     self.summarize()
 
+    # add for metrics per catergory from here
+    if include_metrics_per_category is True:
+        self.summarize_per_category()
+    # add for metrics per category end here
+
     summary_metrics = OrderedDict([
         ('Precision/mAP', self.stats[0]),
         ('Precision/mAP@.50IOU', self.stats[1]),
@@ -288,6 +293,10 @@ class COCOEvalWrapper(cocoeval.COCOeval):
             category)] = self.category_stats[10][category_index]
         per_category_ap['Recall AR@100 (large) ByCategory/{}'.format(
             category)] = self.category_stats[11][category_index]
+    
+    print('---------------------')
+    for key in sorted(per_category_ap):
+        print(key, "\t", 100. * per_category_ap[key])
 
     return summary_metrics, per_category_ap
 
